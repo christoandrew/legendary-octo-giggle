@@ -1,0 +1,86 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="trumeter.iconasystems.com.trumeter">
+
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
+
+    <application
+        android:name="com.iconasystems.android.trumeter.TrumeterRealm"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.iconasystems.android.trumeter.Login"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.iconasystems.android.trumeter.Zones"
+            android:label="Zones" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.Households"
+            android:label="Customers" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.HouseholdDetails"
+            android:label="Trumeter" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.Bill"
+            android:label="Billing" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.Towns"
+            android:label="Towns" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.About"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.iconasystems.android.trumeter.SelectBillingPeriod" />
+        <activity android:name="com.iconasystems.android.trumeter.Routes" />
+        <activity
+            android:name="com.iconasystems.android.trumeter.Report"
+            android:label="@string/title_activity_report"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <provider
+            android:name="com.iconasystems.android.trumeter.sync.StubContentProvider"
+            android:authorities="com.iconasystems.android.sync.provider"
+            android:exported="false"
+            android:syncable="true" />
+
+        <service android:name="com.iconasystems.android.trumeter.sync.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name="com.iconasystems.android.trumeter.sync.SyncService"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+    </application>
+</manifest>
